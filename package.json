@@ -4,7 +4,7 @@
     "uglify": "^0.1.5",
     "uglify-js": "^3.17.4"
   },
-  "name": "testshit",
+  "name": "swingdist",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
