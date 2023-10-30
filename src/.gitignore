@@ -1,0 +1,14 @@
+coverage
+dist
+node_modules
+package-lock.json
+*.log
+.*
+!.README
+!.babelrc
+!.conventional-changelog-lintrc
+!.editorconfig
+!.eslintrc
+!.gitignore
+!.npmignore
+!.travis.yml
