@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "uglify": "^0.1.5",
-    "uglify-js": "^3.17.4"
+    "uglify-js": "^3.17.4",
+    "browserify": "^17.0.0"
   },
   "name": "swingdist",
   "version": "1.0.0",
