@@ -1,14 +1,15 @@
 {
   "dependencies": {
+    "browserify": "^17.0.0",
+    "common-shakeify": "^1.1.2",
     "uglify": "^0.1.5",
-    "uglify-js": "^3.17.4",
-    "browserify": "^17.0.0"
+    "uglify-js": "^3.17.4"
   },
   "name": "swingdist",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "cd src & npm run build & cd .. & browserify main.js -o bundle.js & uglifyjs --compress --output swing.js  -- bundle.js",
+    "build": "cd src & npm run build & cd .. & browserify -p common-shakeify main.js -o bundle.js & uglifyjs --compress --output swing.js  -- bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

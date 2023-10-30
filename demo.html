@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/demo.css" />
+        <script src="./swing.js"></script>
+    </head>
+    <body>
+        <h1>swing-dist demo</h1>
+
+        <div id="viewport">
+            <ul class="stack">
+                <li class="clubs">♣</li>
+                <li class="diamonds">♦</li>
+                <li class="hearts">♥</li>
+                <li class="spades">♠</li>
+            </ul>
+        </div>
+
+        <script>
+            var cards = [].slice.call(document.querySelectorAll('ul li'));
+            var stack = new swingLib.Stack();
+
+            cards.forEach((el) => {
+                stack.createCard(el);
+            });
+        </script>
+    </body>
+</html>

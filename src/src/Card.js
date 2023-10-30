@@ -5,7 +5,7 @@ import prefix from 'prefix';
 import Direction from './Direction';
 import {
   elementChildren,
-  isTouchDevice,
+  isTouchDevice
 } from './utilities';
 
 // Request Animation Frame
@@ -118,7 +118,7 @@ const Card = (stack, targetElement, prepend) => {
     lastThrow = {};
     lastTranslate = {
       coordinateX: 0,
-      coordinateY: 0,
+      coordinateY: 0
     };
     lastX = 0;
     lastY = 0;
@@ -189,7 +189,7 @@ const Card = (stack, targetElement, prepend) => {
         coordinateX,
         coordinateY,
         targetElement,
-        config.throwOutConfidence(coordinateX, coordinateY, targetElement),
+        config.throwOutConfidence(coordinateX, coordinateY, targetElement)
       );
 
       // Not really sure about computing direction here and filtering on directions here.
@@ -279,7 +279,7 @@ const Card = (stack, targetElement, prepend) => {
         const coordianteY = rebound.MathUtil.mapValueInRange(value, 0, 1, lastThrow.fromY, 0);
 
         onSpringUpdate(coordianteX, coordianteY);
-      },
+      }
     });
 
     springThrowOut.addListener({
@@ -304,7 +304,7 @@ const Card = (stack, targetElement, prepend) => {
         }
 
         onSpringUpdate(coordianteX, coordianteY);
-      },
+      }
     });
 
     /**
@@ -330,7 +330,7 @@ const Card = (stack, targetElement, prepend) => {
         offset: coordinateX,
         target: targetElement,
         throwDirection: computeDirection(coordinateX, coordianteY, config.allowedDirections),
-        throwOutConfidence: config.throwOutConfidence(coordinateX, coordianteY, targetElement),
+        throwOutConfidence: config.throwOutConfidence(coordinateX, coordianteY, targetElement)
       });
     };
 
@@ -370,7 +370,7 @@ const Card = (stack, targetElement, prepend) => {
 
         eventEmitter.trigger('throwin', {
           target: targetElement,
-          throwDirection: lastThrow.direction,
+          throwDirection: lastThrow.direction
         });
       } else if (where === Card.THROW_OUT) {
         Card.appendToParent(targetElement);
@@ -378,13 +378,13 @@ const Card = (stack, targetElement, prepend) => {
 
         eventEmitter.trigger('throwout', {
           target: targetElement,
-          throwDirection: lastThrow.direction,
+          throwDirection: lastThrow.direction
         });
 
         /* Emits more accurate events about specific directions */
         eventEmitter.trigger(throwDirectionToEventName[lastThrow.direction], {
           target: targetElement,
-          throwDirection: lastThrow.direction,
+          throwDirection: lastThrow.direction
         });
       } else {
         throw new Error('Invalid throw event.');
@@ -464,7 +464,7 @@ Card.makeConfig = (config = {}) => {
     allowedDirections: [
       Direction.RIGHT,
       Direction.LEFT,
-      Direction.UP,
+      Direction.UP
     ],
     allowMovement: () => {
       return true;

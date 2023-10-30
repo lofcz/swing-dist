@@ -1,4 +1,9 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+(function (global){(function (){
+var swing = require('./src/dist').default
+global.window.swingLib = swing
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./src/dist":7}],2:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -184,7 +189,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 (function (setImmediate,clearImmediate){(function (){
 var nextTick = require('process/browser.js').nextTick;
 var apply = Function.prototype.apply;
@@ -194,14 +199,13 @@ var nextImmediateId = 0;
 
 // DOM APIs, for completeness
 
-exports.setTimeout = function() {
+/* common-shake removed: exports.setTimeout = */ void function() {
   return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
 };
-exports.setInterval = function() {
+/* common-shake removed: exports.setInterval = */ void function() {
   return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
 };
-exports.clearTimeout =
-exports.clearInterval = function(timeout) { timeout.close(); };
+/* common-shake removed: exports.clearTimeout = */ void 0, /* common-shake removed: exports.clearInterval = */ function(timeout) { timeout.close(); };
 
 function Timeout(id, clearFn) {
   this._id = id;
@@ -213,17 +217,17 @@ Timeout.prototype.close = function() {
 };
 
 // Does not start the time, just sets up the members needed.
-exports.enroll = function(item, msecs) {
+/* common-shake removed: exports.enroll = */ void function(item, msecs) {
   clearTimeout(item._idleTimeoutId);
   item._idleTimeout = msecs;
 };
 
-exports.unenroll = function(item) {
+/* common-shake removed: exports.unenroll = */ void function(item) {
   clearTimeout(item._idleTimeoutId);
   item._idleTimeout = -1;
 };
 
-exports._unrefActive = exports.active = function(item) {
+/* common-shake removed: exports._unrefActive = */ void 0, /* common-shake removed: exports.active = */ function(item) {
   clearTimeout(item._idleTimeoutId);
 
   var msecs = item._idleTimeout;
@@ -263,12 +267,7 @@ exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate :
   delete immediateIds[id];
 };
 }).call(this)}).call(this,require("timers").setImmediate,require("timers").clearImmediate)
-},{"process/browser.js":1,"timers":2}],3:[function(require,module,exports){
-(function (global){(function (){
-var swing = require('./src/dist').default
-global.window.swingLib = swing
-}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./src/dist":7}],4:[function(require,module,exports){
+},{"process/browser.js":2,"timers":3}],4:[function(require,module,exports){
 (function (global){(function (){
 "use strict";var _Object$keys=require("@babel/runtime-corejs3/core-js-stable/object/keys"),_Object$getOwnPropertySymbols=require("@babel/runtime-corejs3/core-js-stable/object/get-own-property-symbols"),_filterInstanceProperty=require("@babel/runtime-corejs3/core-js-stable/instance/filter"),_Object$getOwnPropertyDescriptor=require("@babel/runtime-corejs3/core-js-stable/object/get-own-property-descriptor"),_forEachInstanceProperty=require("@babel/runtime-corejs3/core-js-stable/instance/for-each"),_Object$getOwnPropertyDescriptors=require("@babel/runtime-corejs3/core-js-stable/object/get-own-property-descriptors"),_Object$defineProperties=require("@babel/runtime-corejs3/core-js-stable/object/define-properties"),_Object$defineProperty=require("@babel/runtime-corejs3/core-js-stable/object/define-property"),_interopRequireDefault=require("@babel/runtime-corejs3/helpers/interopRequireDefault");_Object$defineProperty(exports,"__esModule",{value:!0}),exports["default"]=void 0;var _defineProperty2=_interopRequireDefault(require("@babel/runtime-corejs3/helpers/defineProperty")),_setInterval2=_interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/set-interval")),_includes=_interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/includes")),_indexOf=_interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/index-of")),_sister=_interopRequireDefault(require("sister")),_hammerjs=_interopRequireDefault(require("hammerjs")),_rebound=_interopRequireDefault(require("rebound")),_prefix=_interopRequireDefault(require("prefix")),_Direction=_interopRequireDefault(require("./Direction")),_utilities=require("./utilities");function ownKeys(a,b){var c=_Object$keys(a);if(_Object$getOwnPropertySymbols){var d=_Object$getOwnPropertySymbols(a);b&&(d=_filterInstanceProperty(d).call(d,function(b){return _Object$getOwnPropertyDescriptor(a,b).enumerable})),c.push.apply(c,d)}return c}function _objectSpread(a){for(var b=1;b<arguments.length;b++){var c,d,e=null==arguments[b]?{}:arguments[b];b%2?_forEachInstanceProperty(c=ownKeys(Object(e),!0)).call(c,function(b){(0,_defineProperty2["default"])(a,b,e[b])}):_Object$getOwnPropertyDescriptors?_Object$defineProperties(a,_Object$getOwnPropertyDescriptors(e)):_forEachInstanceProperty(d=ownKeys(Object(e))).call(d,function(b){_Object$defineProperty(a,b,_Object$getOwnPropertyDescriptor(e,b))})}return a}var slowRafIE9=function(a){(0,_setInterval2["default"])(a,25)},raf=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.msRequestAnimationFrame||slowRafIE9,computeDirection=function(a,b,c){var e,d=Math.abs,f=d(a)>d(b);return e=f?0>a?_Direction["default"].LEFT:_Direction["default"].RIGHT:0>b?_Direction["default"].UP:_Direction["default"].DOWN,(0,_includes["default"])(c).call(c,e)?e:_Direction["default"].INVALID},computeHammerDirections=function(a){return a.vertical&&a.lateral?_hammerjs["default"].DIRECTION_ALL:a.vertical?_hammerjs["default"].DIRECTION_VERTICAL:a.lateral?_hammerjs["default"].DIRECTION_HORIZONTAL:_hammerjs["default"].DIRECTION_NONE},Card=function(a,b,c){var d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y=function getPanMoveEvent(a){return a.lateral&&!a.vertical?function(a){f=a.deltaX}:a.vertical&&!a.lateral?function(a){f=a.deltaX}:function(a){f=a.deltaX,g=a.deltaY}},z=function construct(){d={},e=Card.makeConfig(a.getConfig()),i=(0,_sister["default"])(),r=a.getSpringSystem(),s=r.createSpring(250,10),t=r.createSpring(500,20),l={},m={coordinateX:0,coordinateY:0},n=0,o=0,u={},u[_Direction["default"].LEFT]="throwoutleft",u[_Direction["default"].RIGHT]="throwoutright",u[_Direction["default"].UP]="throwoutup",u[_Direction["default"].DOWN]="throwoutdown",s.setRestSpeedThreshold(.05),s.setRestDisplacementThreshold(.05),t.setRestSpeedThreshold(.05),t.setRestDisplacementThreshold(.05),v=e.throwOutDistance(e.minThrowOutDistance,e.maxThrowOutDistance),p=new _hammerjs["default"].Manager(b,{recognizers:[[_hammerjs["default"].Pan,{direction:computeHammerDirections(e),threshold:2}]]}),c?Card.prependToParent(b):Card.appendToParent(b),i.on("panstart",function(){Card.appendToParent(b),i.trigger("dragstart",{target:b}),f=0,g=0,j=!0,function a(){j&&(h(),raf(a))}()}),x=y(e),i.on("panmove",x),i.on("panend",function(a){j=!1;var c=m.coordinateX+a.deltaX,f=m.coordinateY+a.deltaY,g=e.isThrowOut(c,f,b,e.throwOutConfidence(c,f,b)),h=computeDirection(c,f,e.allowedDirections);g&&h!==_Direction["default"].INVALID?d.throwOut(c,f,h):d.throwIn(c,f,h),i.trigger("dragend",{target:b})}),(0,_utilities.isTouchDevice)()?(b.addEventListener("touchstart",function(a){e.allowMovement(a,(0,_utilities.isTouchDevice)())&&i.trigger("panstart")}),b.addEventListener("touchend",function(){j&&!k&&i.trigger("dragend",{target:b})}),function(){var a;b.addEventListener("touchstart",function(){a=!0}),b.addEventListener("touchend",function(){a=!1}),global.addEventListener("touchmove",function(b){a&&e.allowMovement(b,(0,_utilities.isTouchDevice)())&&b.preventDefault()})}()):(b.addEventListener("mousedown",function(){i.trigger("panstart")}),b.addEventListener("mouseup",function(){j&&!k&&i.trigger("dragend",{target:b})})),p.on("panstart",function(a){k=!0,i.trigger("panstart",a)}),p.on("panmove",function(a){e.allowMovement(a,(0,_utilities.isTouchDevice)())&&i.trigger("panmove",a)}),p.on("panend",function(a){e.allowMovement(a,(0,_utilities.isTouchDevice)())&&(k=!1,i.trigger("panend",a))}),s.addListener({onSpringAtRest:function onSpringAtRest(){i.trigger("throwinend",{target:b})},onSpringUpdate:function onSpringUpdate(a){var b=a.getCurrentValue(),c=_rebound["default"].MathUtil.mapValueInRange(b,0,1,l.fromX,0),d=_rebound["default"].MathUtil.mapValueInRange(b,0,1,l.fromY,0);q(c,d)}}),t.addListener({onSpringAtRest:function onSpringAtRest(){i.trigger("throwoutend",{target:b})},onSpringUpdate:function onSpringUpdate(a){var b,c,d,e=a.getCurrentValue();l.direction===_Direction["default"].RIGHT||l.direction===_Direction["default"].LEFT?(d=l.direction===_Direction["default"].RIGHT?1:-1,b=_rebound["default"].MathUtil.mapValueInRange(e,0,1,l.fromX,v*d),c=l.fromY):(l.direction===_Direction["default"].UP||l.direction===_Direction["default"].DOWN)&&(d=l.direction===_Direction["default"].DOWN?1:-1,b=l.fromX,c=_rebound["default"].MathUtil.mapValueInRange(e,0,1,l.fromY,v*d)),q(b,c)}}),h=function doMove(){if(f!==n||g!==o){n=f,o=g;var a=m.coordinateX+f,c=m.coordinateY+g,d=e.rotation(a,c,b,e.maxRotation);e.transform(b,a,c,d),i.trigger("dragmove",{offset:a,target:b,throwDirection:computeDirection(a,c,e.allowedDirections),throwOutConfidence:e.throwOutConfidence(a,c,b)})}},q=function _onSpringUpdate(a,c){var d=e.rotation(a,c,b,e.maxRotation);m.coordinateX=a||0,m.coordinateY=c||0,e.transform(b,a,c,d)},w=function throwWhere(a,c,d,f){if(l.fromX=e.lateral?c:0,l.fromY=e.vertical?d:0,l.direction=f||computeDirection(c,d,e.allowedDirections),a===Card.THROW_IN)Card.appendToParent(b),s.setCurrentValue(0).setAtRest().setEndValue(1),i.trigger("throwin",{target:b,throwDirection:l.direction});else if(a===Card.THROW_OUT)Card.appendToParent(b),t.setCurrentValue(0).setAtRest().setVelocity(e.velocity).setEndValue(1),i.trigger("throwout",{target:b,throwDirection:l.direction}),i.trigger(u[l.direction],{target:b,throwDirection:l.direction});else throw new Error("Invalid throw event.")}};return z(),d.on=i.on,d.off=i.off,d.trigger=i.trigger,d.throwIn=function(a,b,c){w(Card.THROW_IN,a,b,c)},d.throwOut=function(a,b,c){w(Card.THROW_OUT,a,b,c)},d.unbindListeners=function(){p.destroy(),s.destroy(),t.destroy()},d.destroy=function(){d.unbindListeners(),a.destroyCard(d)},d};Card.makeConfig=function(){var a=0<arguments.length&&arguments[0]!==void 0?arguments[0]:{},b={allowedDirections:[_Direction["default"].RIGHT,_Direction["default"].LEFT,_Direction["default"].UP],allowMovement:function allowMovement(){return!0},isThrowOut:Card.isThrowOut,lateral:!0,maxRotation:20,maxThrowOutDistance:500,minThrowOutDistance:400,rotation:Card.rotation,throwOutConfidence:Card.throwOutConfidence,throwOutDistance:Card.throwOutDistance,transform:Card.transform,velocity:100,vertical:!0};return _objectSpread(_objectSpread({},b),a)},Card.transform=function(a,b,c,d){a.style[(0,_prefix["default"])("transform")]="translate3d(0, 0, 0) translate("+b+"px, "+c+"px) rotate("+d+"deg)"},Card.appendToParent=function(a){var b=a.parentNode,c=(0,_utilities.elementChildren)(b),d=(0,_indexOf["default"])(c).call(c,a),e=d+1!==c.length;return e&&(a.remove(),b.append(a)),e},Card.prependToParent=function(a){var b=a.parentNode;a.remove(),b.insertBefore(a,b.firstChild)},Card.throwOutConfidence=function(a,b,c){var d=Math.min,e=Math.abs,f=d(e(a)/c.offsetWidth,1),g=d(e(b)/c.offsetHeight,1);return Math.max(f,g)},Card.isThrowOut=function(a,b,c,d){return 1===d},Card.throwOutDistance=function(a,b){return Math.floor(Math.random()*(b+1-a))+a},Card.rotation=function(a,b,c,d){var e=Math.min,f=e(Math.max(a/c.offsetWidth,-1),1),g=(0<b?1:-1)*e(Math.abs(b)/100,1),h=f*g*d;return h},Card.THROW_IN="in",Card.THROW_OUT="out";var _default=exports["default"]=Card;
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
@@ -1038,16 +1037,16 @@ module.exports = {
   forEach: createMethod(0),
   // `Array.prototype.map` method
   // https://tc39.es/ecma262/#sec-array.prototype.map
-  map: createMethod(1),
+  /* common-shake removed: map: createMethod(1) */
   // `Array.prototype.filter` method
   // https://tc39.es/ecma262/#sec-array.prototype.filter
   filter: createMethod(2),
   // `Array.prototype.some` method
   // https://tc39.es/ecma262/#sec-array.prototype.some
-  some: createMethod(3),
+  /* common-shake removed: some: createMethod(3) */
   // `Array.prototype.every` method
   // https://tc39.es/ecma262/#sec-array.prototype.every
-  every: createMethod(4),
+  /* common-shake removed: every: createMethod(4) */
   // `Array.prototype.find` method
   // https://tc39.es/ecma262/#sec-array.prototype.find
   find: createMethod(5),
@@ -1056,7 +1055,7 @@ module.exports = {
   findIndex: createMethod(6),
   // `Array.prototype.filterReject` method
   // https://github.com/tc39/proposal-array-filtering
-  filterReject: createMethod(7)
+  /* common-shake removed: filterReject: createMethod(7) */
 };
 
 },{"../internals/array-species-create":102,"../internals/function-bind-context":129,"../internals/function-uncurry-this":135,"../internals/indexed-object":147,"../internals/length-of-array-like":165,"../internals/to-object":201}],96:[function(require,module,exports){
@@ -1714,7 +1713,7 @@ var PROPER = EXISTS && (function something() { /* empty */ }).name === 'somethin
 var CONFIGURABLE = EXISTS && (!DESCRIPTORS || (DESCRIPTORS && getDescriptor(FunctionPrototype, 'name').configurable));
 
 module.exports = {
-  EXISTS: EXISTS,
+  /* common-shake removed: EXISTS: EXISTS */
   PROPER: PROPER,
   CONFIGURABLE: CONFIGURABLE
 };
@@ -2017,9 +2016,9 @@ if (NATIVE_WEAK_MAP || shared.state) {
 
 module.exports = {
   set: set,
-  get: get,
-  has: has,
-  enforce: enforce,
+  /* common-shake removed: get: get */
+  /* common-shake removed: has: has */
+  /* common-shake removed: enforce: enforce */
   getterFor: getterFor
 };
 
@@ -2954,7 +2953,7 @@ var createMethod = function (CONVERT_TO_STRING) {
 module.exports = {
   // `String.prototype.codePointAt` method
   // https://tc39.es/ecma262/#sec-string.prototype.codepointat
-  codeAt: createMethod(false),
+  /* common-shake removed: codeAt: createMethod(false) */
   // `String.prototype.at` method
   // https://github.com/mathiasbynens/String.prototype.at
   charAt: createMethod(true)
@@ -8747,7 +8746,7 @@ return index;
 })));
 
 }).call(this)}).call(this,require('_process'),require("timers").setImmediate)
-},{"_process":1,"timers":2}],302:[function(require,module,exports){
+},{"_process":2,"timers":3}],302:[function(require,module,exports){
 'use strict';
 
 var Sister;
@@ -8810,4 +8809,4 @@ Sister = function () {
 
 module.exports = Sister;
 
-},{}]},{},[3]);
+},{}]},{},[1]);
