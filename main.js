@@ -1,2 +1,2 @@
-var swing = require('@brugarolas/swing').default
+var swing = require('./src/dist').default
 global.window.swingLib = swing

@@ -48,12 +48,8 @@
     "type": "git",
     "url": "https://github.com/brugarolas/swing"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && npm run test"
-    }
-  },
   "scripts": {
+    "dist": "browserify main.js -o bundle.js & uglifyjs --compress --output min.js  -- bundle.js",
     "build": "babel ./src --out-dir ./dist --copy-files",
     "lint": "eslint ./src ./test",
     "test": "ava --verbose --serial",

@@ -24,6 +24,8 @@ const Stack = (config) => {
   stack.on = eventEmitter.on;
   stack.off = eventEmitter.off;
 
+  stack.distVersion = 1;
+
   /**
    * Get the configuration object.
    *
